@@ -15,11 +15,8 @@ public:
     void addChild(Node<T>* child) { children.push_back(child); }
     const std::vector<Node<T>*>& getChildren() const { return children; }
 
-    ~Node() {
-        for (Node<T>* child : children) {
-            delete child;
-        }
-    }
+    // Node destructor should not delete children; Tree will manage that.
+    ~Node() = default;
 };
 
 #endif // NODE_HPP

@@ -1,22 +1,6 @@
 #include "tree.hpp"
 #include <iostream>
 
-template <typename T, int K>
-void Tree<T, K>::deleteNodes(Node<T>* node)
-{
-    if (node == nullptr) return;
-    for (Node<T>* child : node->getChildren())
-    {
-        deleteNodes(child);
-    }
-    delete node;
-}
-
-template <typename T, int K>
-Tree<T, K>::~Tree()
-{
-    deleteNodes(root);
-}
 
 template <typename T, int K>
 void Tree<T, K>::add_root(Node<T>& root)

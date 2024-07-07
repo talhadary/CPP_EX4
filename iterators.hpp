@@ -97,7 +97,6 @@ class InOrderIterator {
     // Helper function to push all left children of the given node onto the stack
     void pushLeft(Node<T>* node) {
         while (node) {
-            std::cout << "Pushing node with value: " << node->getValue() << std::endl;
             nodes.push(node);
             const auto& children = node->getChildren();
             if (!children.empty()) {
@@ -128,11 +127,8 @@ public:
     // Increment operator: Moves to the next node in in-order
     InOrderIterator& operator++() {
         if (nodes.empty()) return *this;
-
         Node<T>* node = nodes.top();
         nodes.pop();
-        std::cout << "Visiting node with value: " << node->getValue() << std::endl;
-
         const auto& children = node->getChildren();
         if (children.size() > 1) { // Check if there is a right child
             pushLeft(children[1]); // Push all left children of the right child

@@ -11,11 +11,10 @@ private:
     int numOfChildren;
     Node<T>* root;
 
-    void deleteNodes(Node<T>* node);
 
 public:
     Tree() : numOfChildren(K), root(nullptr) {}
-    ~Tree();
+    ~Tree() = default;
 
     void add_root(Node<T>& root);
     void add_sub_node(Node<T>& root, Node<T>& node);
