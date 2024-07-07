@@ -31,26 +31,31 @@ int main()
      *  1.4  1.5  1.6
      */
 
+    cout << "Pre-order traversal:" << endl;
     for (auto it = tree.begin_pre_order(); it != tree.end_pre_order(); ++it)
     {
         cout << (*it)->getValue() << endl;
     } // prints: 1.1, 1.2, 1.4, 1.5, 1.3, 1.6
 
+    cout << "Post-order traversal:" << endl;
     for (auto it = tree.begin_post_order(); it != tree.end_post_order(); ++it)
     {
         cout << (*it)->getValue() << endl;
     } // prints: 1.4, 1.5, 1.2, 1.6, 1.3, 1.1
 
+    cout << "In-order traversal:" << endl;
     for (auto it = tree.begin_in_order(); it != tree.end_in_order(); ++it)
     {
         cout << (*it)->getValue() << endl;
     } // prints: 1.4, 1.2, 1.5, 1.1, 1.6, 1.3
 
+    cout << "BFS traversal:" << endl;
     for (auto it = tree.begin_bfs_scan(); it != tree.end_bfs_scan(); ++it)
     {
         cout << (*it)->getValue() << endl;
     } // prints: 1.1, 1.2, 1.3, 1.4, 1.5, 1.6
 
+    cout << "DFS traversal:" << endl;
     for (auto it = tree.begin_dfs_scan(); it != tree.end_dfs_scan(); ++it)
     {
         cout << (*it)->getValue() << endl;

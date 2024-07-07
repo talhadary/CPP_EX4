@@ -1,10 +1,17 @@
 #include "node.hpp"
+#include <string> // Add this line to include std::string
 
 template<typename T>
 Node<T>::Node(T value)
 {
     this->value = value;
     this->parent = nullptr;
+}
+
+template <typename T>
+Node<T>::~Node()
+{
+    delele(children);
 }
 
 template<typename T>
@@ -35,4 +42,4 @@ void Node<T>::addChild(Node<T>& node)
 // Explicit instantiation
 template class Node<int>;
 template class Node<double>;
-template class Node<string>;
+template class Node<std::string>; // Use std::string instead of string

@@ -3,23 +3,23 @@
 
 #include <vector>
 
-using namespace std;
-
 template <typename T>
-class Node
-{
-private:
+class Node {
     T value;
-    Node* parent;
-    vector<Node*> children;
+    std::vector<Node<T>*> children;
 
 public:
-    Node(T value);
-    ~Node() {}
-    T getValue() const;
-    Node* getParent() const;
-    vector<Node*> getChildren() const;
-    void addChild(Node<T>& node);
+    Node(const T& val) : value(val) {}
+
+    const T& getValue() const { return value; }
+    void addChild(Node<T>* child) { children.push_back(child); }
+    const std::vector<Node<T>*>& getChildren() const { return children; }
+
+    ~Node() {
+        for (Node<T>* child : children) {
+            delete child;
+        }
+    }
 };
 
 #endif // NODE_HPP
