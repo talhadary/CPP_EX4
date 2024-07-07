@@ -4,6 +4,7 @@ template<typename T>
 Node<T>::Node(T value)
 {
     this->value = value;
+    this->parent = nullptr;
 }
 
 template<typename T>
@@ -25,7 +26,13 @@ vector<Node<T>*> Node<T>::getChildren() const
 }
 
 template<typename T>
-void Node<T>::addChild(Node<T> &node)
+void Node<T>::addChild(Node<T>& node)
 {
-    this->children.push_back(node);
+    node.parent = this;
+    this->children.push_back(&node);
 }
+
+// Explicit instantiation
+template class Node<int>;
+template class Node<double>;
+template class Node<string>;

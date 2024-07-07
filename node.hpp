@@ -1,3 +1,6 @@
+#ifndef NODE_HPP
+#define NODE_HPP
+
 #include <vector>
 
 using namespace std;
@@ -5,16 +8,18 @@ using namespace std;
 template <typename T>
 class Node
 {
-    private:
+private:
     T value;
     Node* parent;
     vector<Node*> children;
 
-    public:
+public:
     Node(T value);
     ~Node() {}
     T getValue() const;
     Node* getParent() const;
     vector<Node*> getChildren() const;
-    void addChild(Node<T> &node);
+    void addChild(Node<T>& node);
 };
+
+#endif // NODE_HPP
