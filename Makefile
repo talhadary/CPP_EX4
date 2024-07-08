@@ -4,27 +4,22 @@ CXX = clang++
 # Compiler flags
 CXXFLAGS = -std=c++17 -Wall -Wextra -pedantic -O2
 
-# Executable name
-EXEC = demo
-
-# Source files
-SRCS = Demo.cpp tree.cpp
-
-# Object files
-OBJS = $(SRCS:.cpp=.o)
-
 # Header files
-HEADERS = node.hpp tree.hpp iterators.hpp
+HEADERS = node.hpp tree.hpp iterators.hpp doctest.h
+
+# default target
+all: demo test
 
 # run the executable
-run: $(EXEC)
-	./$(EXEC)
-
-# make the executable
-demo: $(EXEC)
+run: demo
+	./demo
 
 # Link object files to create the executable
-$(EXEC): $(OBJS)
+demo: Demo.o
+	$(CXX) $(CXXFLAGS) -o $@ $^
+
+# Link object files to create the test
+test: test.o TestCounter.o
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
 # Compile source files into object files
@@ -33,7 +28,7 @@ $(EXEC): $(OBJS)
 
 # Clean up object files and the executable
 clean:
-	rm -f $(OBJS) $(EXEC)
+	rm -f Demo.o demo test.o TestCounter.o test
 
 # Phony targets
 .PHONY: all clean demo run

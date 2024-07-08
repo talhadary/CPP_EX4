@@ -1,22 +1,43 @@
-#ifndef NODE_HPP
-#define NODE_HPP
-
+// node.hpp
+#pragma once
 #include <vector>
 
 template <typename T>
 class Node {
-    T value;
-    std::vector<Node<T>*> children;
-
 public:
-    Node(const T& val) : value(val) {}
+    Node(const T &value);
+    const T &getValue() const;
+    void addChild(Node<T> *child);
+    const std::vector<Node<T> *> &getChildren() const;
+    bool operator==(Node<T> &other) const;
 
-    const T& getValue() const { return value; }
-    void addChild(Node<T>* child) { children.push_back(child); }
-    const std::vector<Node<T>*>& getChildren() const { return children; }
-
-    // Node destructor should not delete children; Tree will manage that.
-    ~Node() = default;
+private:
+    T value;
+    std::vector<Node<T> *> children;
 };
 
-#endif // NODE_HPP
+// Definitions in header file
+template <typename T>
+Node<T>::Node(const T &value) : value(value) {}
+
+template <typename T>
+const T &Node<T>::getValue() const {
+    return value;
+}
+
+template <typename T>
+void Node<T>::addChild(Node<T> *child) {
+    if(child == nullptr) { return; }
+    children.push_back(child);
+}
+
+template <typename T>
+const std::vector<Node<T> *> &Node<T>::getChildren() const {
+    return children;
+}
+
+template <typename T>
+inline bool Node<T>::operator==(Node<T> &other) const
+{
+    return this == &other;
+}

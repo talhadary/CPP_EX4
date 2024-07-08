@@ -89,7 +89,7 @@ public:
     }
 };
 
-// Revised In-order Iterator: Visits the left subtree, then the root, then the right subtree
+// In-order Iterator: Visits the left subtree, then the root, then the right subtree
 template <typename T>
 class InOrderIterator {
     std::stack<Node<T>*> nodes; // Stack to manage nodes for traversal
@@ -144,7 +144,7 @@ public:
 };
 
 // Breadth-First Search (BFS) Iterator: Visits nodes level by level
-template <typename T>
+template <typename T, std::size_t k=2>
 class BFSIterator {
     std::queue<Node<T>*> nodes; // Queue to manage nodes for traversal
 public:
@@ -180,8 +180,8 @@ public:
     }
 };
 
-// Revised Depth-First Search (DFS) Iterator: Visits nodes depth-wise
-template <typename T>
+// Depth-First Search (DFS) Iterator: Visits nodes depth-wise
+template <typename T, std::size_t k=2>
 class DFSIterator {
     std::stack<Node<T>*> nodes; // Stack to manage nodes for traversal
 public:
