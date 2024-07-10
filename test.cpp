@@ -177,8 +177,36 @@ TEST_CASE("Testing DFS Traversal") {
 
     for(uint i = 0; i < expected_dfs.size(); i++)
     {
-        std::cout << "expected value " << expected_dfs[i]->getValue()
-        << " result value " << result_dfs[i]->getValue() << std::endl;
         CHECK(*expected_dfs[i] == *result_dfs[i]);
+    }
+}
+
+TEST_CASE("Testing Heap Traversal") {
+    Tree<int, 3> myTree;
+    Node<int> root(1);
+    Node<int> child1(2);
+    Node<int> child2(3);
+    Node<int> child3(4);
+    Node<int> child4(5);
+    Node<int> child5(6);
+
+    myTree.add_root(root);
+    myTree.add_sub_node(root, child1);
+    myTree.add_sub_node(root, child2);
+    myTree.add_sub_node(root, child3);
+    myTree.add_sub_node(child1, child4);
+    myTree.add_sub_node(child3, child5);
+
+    std::vector<int> expectedMinHeap = {1, 2, 3, 4, 5, 6};
+    std::vector<int> resultMinHeap;
+
+    for(auto it = myTree.begin_heap_traversal(); it != myTree.end_heap_traversal(); ++it)
+    {
+        resultMinHeap.push_back(*it);
+    }
+
+    for(size_t i = 0; i < resultMinHeap.size(); ++i)
+    {
+        CHECK(resultMinHeap[i] == expectedMinHeap[i]);
     }
 }

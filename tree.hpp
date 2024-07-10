@@ -4,6 +4,8 @@
 #include "node.hpp"
 #include "iterators.hpp"
 #include <iostream>
+#include <algorithm>
+#include <functional>
 
 using std::size_t;
 
@@ -13,6 +15,19 @@ class Tree
 private:
     size_t numOfChildren;
     Node<T>* root;
+    std::vector<T> min_heap;
+
+    void heapify()
+    {
+        if(!min_heap.empty()) { min_heap.clear(); }
+
+        for(auto it = this->begin_bfs_scan(); it != this->end_bfs_scan(); ++it)
+        {
+            min_heap.push_back((*it)->getValue());
+        }
+
+        std::make_heap(min_heap.begin(), min_heap.end(), std::greater<>{});
+    }
 
 public:
     Tree() : numOfChildren(K), root(nullptr) {}
@@ -40,6 +55,7 @@ public:
     using InOrderIterator = ::InOrderIterator<T>;
     using BFSIterator = ::BFSIterator<T, K>;
     using DFSIterator = ::DFSIterator<T, K>;
+    using MinHeapIterator = ::MinHeapIterator<T>;
 
     PreOrderIterator begin_pre_order() {
         return PreOrderIterator(root);
@@ -79,6 +95,15 @@ public:
 
     DFSIterator end_dfs_scan() {
         return DFSIterator(nullptr);
+    }
+
+    MinHeapIterator begin_heap_traversal() {
+        heapify();
+        return MinHeapIterator(min_heap.begin());
+    }
+
+    MinHeapIterator end_heap_traversal() {
+        return MinHeapIterator(min_heap.end());
     }
 };
 
